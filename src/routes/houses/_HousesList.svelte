@@ -7,7 +7,7 @@ import houses from "./_houses.js"
   .houses {
     display: grid;
     grid-template-columns: 400px 400px 400px;
-    grid-template-rows: 300px 300px;
+  
     grid-gap: 40px;
   }
 </style>
@@ -18,5 +18,5 @@ import houses from "./_houses.js"
     <House {...house} />
   {/each}
 </section>
-{@debug houses} 
+
 </div>

@@ -12,3 +12,4 @@ import HousesList from "./houses/_HousesList.svelte"
 
 
 <HousesList />
+<HousesList />
