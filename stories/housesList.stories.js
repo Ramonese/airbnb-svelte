@@ -1,8 +1,11 @@
-//import { storiesOf } from '@storybook/svelte';
 import House from "../src/routes/houses/_House.svelte";
 
 export default {
-  title: "House",
+  title: "House Card",
+  parameters: {
+    notes: "This is a description of component"
+  }
+
 };
 
 export const complete = () => ({
@@ -10,14 +13,17 @@ export const complete = () => ({
   props: { 
     title: "Beautiful flat in Ostuni!", 
     type: "Entire house", 
-    picture: "/assets/img/house-1.jpg",
+    picture: "localhost:3000/static/img/house-1.jpg",
     town: "Ostuni",
     rating: "200",
     reviewsCount: "105",
     superhost: true,
     id: "1772"
   },
-  notes: "This is note"
+  parameters: {
+    notes: "This is another note"
+  },
+   
 });
 export const basic = () => ({
   Component: House,

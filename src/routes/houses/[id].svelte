@@ -9,19 +9,34 @@
 		} else {
 			this.error(res.status, data.message);
 		}
-	}
+  }
+  
 </script>
 
 <script>
-	export let house
+import  DateRangePicker  from "./_DateRangePicker.svelte";
+export let house
 </script>
-
+<style>
+.house-container {
+  display: grid;
+  grid-template-columns: 1fr 30%;
+  grid-column-gap: 3rem;
+}
+aside {
+  border: 1px solid grey;
+}
+</style>
 <svelte:head>
 	<title>{house.title}</title>
 </svelte:head>
 
-<div>
+<div class="house-container">
+
+  <main>
+  <header>
   <img src="{house.picture}" width="100%" style="" alt="{house.title}" />
+</header>
   <p>{house.type} - {house.town}</p>
   <p>{house.title}</p>
   <p>{house.guests} guests - {house.bedrooms} bedrooms - {house.beds} beds - {house.baths} baths</p>
@@ -48,13 +63,17 @@
       <p>You’ll have the space to yourself and will only share it with those you’re traveling with.</p>
     {/if}
 
-    <h3>198 Reviews</h3>
+    <h3>177 Reviews</h3>
 
     {#each house.reviews as review}
-      <img src={review.avatar} alt="" />
+      <!-- <img src={review.avatar} alt="" /> -->
       <p><strong>{review.user}</strong></p>
       <p>{review.date}</p>
       <p>{review.comment}</p>
     {/each}
-
+  </main>
+  <aside>
+  <h2>Pick date</h2>
+  <DateRangePicker />
+  </aside>
 </div>

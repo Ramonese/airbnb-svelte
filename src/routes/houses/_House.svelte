@@ -16,7 +16,7 @@
 <p>{type}</p>
 <h3>{town}</h3>
 <p>{rating} ({reviewsCount}) {superhost ? '- Superhost' : ''}</p>
-<a href="{id}">{id}</a>
+<a href="/houses/{id}">{id}</a>
 
 </section>
 <style>
