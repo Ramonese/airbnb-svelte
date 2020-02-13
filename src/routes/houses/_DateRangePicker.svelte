@@ -1,39 +1,42 @@
 <script>
-  import Datepicker from "../../lib/svelte-calendar-1.0.10/src/Components/Datepicker.svelte";
-  const dateFormat = "#{l}, #{F} #{j}, #{Y}";
-  let startDate = new Date();
-  let endDate = new Date(startDate.getTime() + 1000 * 3600 * 24);
+  import Datepicker from '../../lib/svelte-calendar-1.0.10/src/Components/Datepicker.svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
+  const dateFormat = '#{l}, #{F} #{j}, #{Y}'
+  let startDate = new Date()
+  let endDate = new Date(startDate.getTime() + 1000 * 3600 * 24)
   const startDateSelectableCallback = date => {
-    return true;
-  };
+    return true
+  }
   const firstDateIsPastDayComparedToSecond = (firstDate, secondDate) => {
     if (firstDate.setHours(0, 0, 0, 0) - secondDate.setHours(0, 0, 0, 0) >= 0) {
       //first date is in future, or it is today
-      return false;
+      return false
     }
-    return true;
-  };
+    return true
+  }
   let endDateSelectableCallback = date => {
-    const today = new Date();
+    const today = new Date()
     if (date.getTime() - startDate.getTime() < 0) {
-      return false;
+      return false
     }
     if (
       date.getFullYear() === today.getFullYear() &&
       date.getMonth() === today.getMonth() &&
       date.getDate() === today.getDate()
     ) {
-      return false;
+      return false
     }
     if (
       date.getFullYear() === startDate.getFullYear() &&
       date.getMonth() === startDate.getMonth() &&
       date.getDate() === startDate.getDate()
     ) {
-      return false;
+      return false
     }
-    return true;
-  };
+    return true
+  }
 </script>
 
 <style>
@@ -51,15 +54,16 @@
     start={new Date()}
     selectableCallback={startDateSelectableCallback}
     on:dateSelected={e => {
-      startDate = new Date(e.detail.date);
+      startDate = new Date(e.detail.date)
       if (!firstDateIsPastDayComparedToSecond(startDate, endDate)) {
-        endDate = new Date(startDate.getTime() + 1000 * 3600 * 24);
+        endDate = new Date(startDate.getTime() + 1000 * 3600 * 24)
       }
-      endDateSelectableCallback = endDateSelectableCallback;
+      endDateSelectableCallback = endDateSelectableCallback
+      dispatch('datesChanged', { startDate: startDate, endDate: endDate })
     }}>
     <div class="check-in">
       {`${startDate.getDate()} ${startDate.toLocaleString('default', {
-        month: 'long'
+        month: 'long',
       })}`}
     </div>
   </Datepicker>
@@ -69,11 +73,12 @@
     start={new Date()}
     selectableCallback={endDateSelectableCallback}
     on:dateSelected={e => {
-      endDate = new Date(e.detail.date);
+      endDate = new Date(e.detail.date)
+      dispatch('datesChanged', { startDate: startDate, endDate: endDate })
     }}>
     <div class="check-in">
       {`${endDate.getDate()} ${endDate.toLocaleString('default', {
-        month: 'long'
+        month: 'long',
       })}`}
     </div>
   </Datepicker>
